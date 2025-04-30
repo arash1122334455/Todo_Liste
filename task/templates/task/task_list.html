@@ -1,0 +1,43 @@
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لیست کارها</title>
+    <link rel="stylesheet" href="{%static 'task/style.css'%}">  
+
+</head>
+<body>
+<div class= 'container'>
+    <h1>لیست کارهای من</h1>
+
+    <ul>
+        {% for task in tasks %}
+        <li class="task-item">
+            {{ task.title }} - {{ task.description }}
+            <form method="POST" action="{% url 'delete_task' task.id %}" style="display: inline;">
+                {% csrf_token %}
+                <button class="funcy-button" type="submit">حذف</button>
+            </form>
+        </li>
+        {% empty %}
+            <li>هیچ کاری ثیت نشده</li>
+        {% endfor %}
+    </ul>
+
+
+    <form class="box" method = 'POST'>
+        {% csrf_token %}
+        <p>هدفتو بنویس ما کمکت میکنیم</p>
+        {{ form.as_p }}
+        <button class="funcy-button" type="submit">ثبت</button>
+    </form>
+</div>
+
+</body>
+</html>
