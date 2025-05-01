@@ -30,7 +30,7 @@ import os
 DEBUG = os.getenv('DEBUG' , 'False')
 
 ALLOWED_HOSTS = ['*']
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT: Path = BASE_DIR / 'staticfiles'
 
 
 # Application definition
@@ -79,10 +79,10 @@ WSGI_APPLICATION = 'Inventory.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+import dj_database_url
 DATABASES = {
-    'default': {
-       dj_database_url.config(default=os.environ.get('DATABASE_URL'))
-    }
+    'default':
+dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
 
 
@@ -121,11 +121,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 import os
+import dj_database_url
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.compressedManifestStaticFilesStorage'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR / 'task' /  'static')
+    os.path.join(BASE_DIR,'static')
 ]
 
 # Default primary key field type
