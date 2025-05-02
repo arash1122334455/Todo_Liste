@@ -8,5 +8,6 @@ class Works(models.Model):
     create_at = models.DateTimeField(auto_now_add=True)
     descriptoin = models.TextField(blank=True)
     is_deleted = models.BooleanField(default=False)
+
     def __str__(self):
         return self.title
